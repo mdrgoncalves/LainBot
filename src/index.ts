@@ -1,20 +1,17 @@
-import { Client } from 'discord.js';
+import { Client } from "discord.js";
+import dotenv from 'dotenv';
 
-const client = new Client({ intents: 'Guilds' });
+import ready from "./listeners/ready";
+import interactionCreate from "./listeners/interactionCreate";
 
-client.on('ready', () => console.log('Ready to begin!'));
+console.log("Bot is starting...");
+dotenv.config();
 
-client.on('disconnected', () => {
-	console.log('Disconnected!');
-	process.exit(1);
+const client = new Client({
+    intents: []
 });
 
-// This code will run once the bot receives any message.
-client.on("message", msg => {
-	if (msg.content.indexOf('ping') === 0) {
-		msg.channel.send('pong!');
-		console.log('pong-ed ' + msg.author.username);
-	}
-});
+ready(client);
 
-client.login('BOT_TOKEN');
+
+client.login(process.env.BOT_TOKEN);
