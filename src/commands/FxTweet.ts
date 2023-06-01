@@ -6,7 +6,7 @@ import {
   InteractionResponse,
 } from 'discord.js';
 
-import { Command } from '../Command';
+import { Command } from '../interfaces/Command';
 
 export const FxTweet: Command = {
   name: 'fxtweet',
