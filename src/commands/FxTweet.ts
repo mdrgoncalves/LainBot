@@ -3,6 +3,7 @@ import {
   Client,
   ApplicationCommandType,
   ApplicationCommandOptionType,
+  InteractionResponse,
 } from 'discord.js';
 
 import { Command } from '../Command';
@@ -19,15 +20,16 @@ export const FxTweet: Command = {
       required: true,
     },
   ],
-  run: async (client: Client, interaction: CommandInteraction) => {
+  run: (
+    client: Client,
+    interaction: CommandInteraction,
+  ): Promise<InteractionResponse<boolean>> => {
     const inputURL = interaction.options.get('tweet')?.value as string;
-
     if (!inputURL.startsWith('https://twitter.com')) {
-      await interaction.reply({
+      return interaction.reply({
         content: 'Please provide a valid Twitter URL, b-baka!',
         ephemeral: true,
       });
-      return;
     }
 
     const modifiedUrl = inputURL.replace(
@@ -35,7 +37,7 @@ export const FxTweet: Command = {
       'https://fxtwitter.com',
     );
 
-    await interaction.reply({
+    return interaction.reply({
       content: modifiedUrl,
     });
   },

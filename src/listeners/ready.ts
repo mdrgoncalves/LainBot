@@ -1,5 +1,5 @@
 import { Client, ActivityType } from 'discord.js';
-import { Commands } from '../Commands';
+import { Commands } from '../interfaces/Commands';
 
 export default (client: Client): void => {
   client.on('ready', async () => {
