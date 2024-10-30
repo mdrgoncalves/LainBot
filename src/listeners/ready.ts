@@ -11,8 +11,8 @@ export default (client: Client): void => {
 
     await client.application.commands.set(Commands);
 
-    client.user.setActivity('sua mãe pro alto!', {
-      type: ActivityType.Playing,
+    client.user.setActivity('Todos estamos connectados', {
+      type: ActivityType.Custom,
     });
 
     console.log(`${client.user.username} is alive!`);

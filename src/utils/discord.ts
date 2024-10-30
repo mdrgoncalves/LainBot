@@ -1,5 +1,13 @@
 import { Client, TextChannel } from 'discord.js';
 
-export const generalChat = (client: Client) => {
-  return client.channels.cache.get('145615594991910912') as TextChannel;
+type GetChannelProps = {
+  client: Client;
+  channelId: string;
+};
+
+export const getChannel = ({
+  client,
+  channelId,
+}: GetChannelProps): TextChannel => {
+  return client.channels.cache.get(channelId) as TextChannel;
 };
