@@ -1,21 +1,17 @@
-import {
-  CommandInteraction,
-  Client,
-  ApplicationCommandType,
-  InteractionResponse,
-} from 'discord.js';
+import { ApplicationCommandType } from 'discord.js';
 
-import { Command } from '../interfaces/Command';
+import type { Command } from '../interfaces/Command';
 
-export const Hello: Command = {
+export const Hello = {
   name: 'hello',
   description: 'Returns a greeting',
   type: ApplicationCommandType.ChatInput,
-  run: (
-    client: Client,
-    interaction: CommandInteraction,
-  ): Promise<InteractionResponse<boolean>> => {
-    const username = interaction.user?.username;
+  run: (_, interaction) => {
+    if (!interaction.user) {
+      throw new Error('Usuário não definido na interação.');
+    }
+
+    const username = interaction.user.username;
     const content = `Ara ara... Hi, ${username}-kun!`;
 
     return interaction.reply({
@@ -23,4 +19,4 @@ export const Hello: Command = {
       content,
     });
   },
-};
+} satisfies Command;

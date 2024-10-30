@@ -1,6 +1,6 @@
 {
   "name": "big-bot",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "main": "./src/index.ts",
   "contributors": [
     "Lucas Müller <lucas@muller.codes>",
@@ -12,12 +12,14 @@
   },
   "scripts": {
     "start": "ts-node src/index.ts",
-    "dev": "nodemon --watch 'src/' --exec 'ts-node src/index.ts' -e ts"
+    "dev": "nodemon --watch 'src/' --exec 'ts-node src/index.ts' -e ts",
+    "build": "tsc"
   },
-  "packageManager": "yarn@3.5.1",
+  "packageManager": "yarn@3.5.0",
   "dependencies": {
     "discord.js": "^14.11.0",
-    "dotenv": "^16.1.2"
+    "dotenv": "^16.1.2",
+    "rss-parser": "^3.13.0"
   },
   "devDependencies": {
     "eslint": "^8.40.0",
