@@ -18,8 +18,5 @@ export const embedConstructor = ({ title, link, image, summary }: NewsItem) => {
     .setURL(link || 'https://www.rpgsite.net')
     .setDescription(summary || 'No summary')
     .setImage(extractSrc(image || '') || '')
-    .setFooter({
-      text: 'Date:',
-    })
     .setTimestamp();
 };
