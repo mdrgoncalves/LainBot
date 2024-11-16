@@ -14,12 +14,18 @@ export default (client: Client): void => {
       channelId: NEWS_CHANNEL_ID,
     }) as TextChannel;
 
-    setInterval(async () => {
+    const getNews = async () => {
       const news = await fetchLatestNews();
       if (!news) return;
 
       const embed = embedConstructor(news);
       channel.send({ embeds: [embed] });
+    };
+
+    await getNews();
+
+    setInterval(async () => {
+      await getNews();
     }, FETCH_INTERVAL_IN_MS);
   });
 };

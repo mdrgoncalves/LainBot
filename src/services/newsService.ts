@@ -1,25 +1,25 @@
 import Parser from 'rss-parser';
 
-import type { NewsItem } from 'interfaces/News';
+import type { FeedItem, NewsItem } from 'interfaces/News';
 
 const parser = new Parser();
 const feedUrl = 'https://www.rpgsite.net/feed';
 let latestNewsId: string | null = null;
 
 const haveNewsTag = (id: string): boolean => {
-  const tagPattern = /,\d+:(.*?)\//;
-  const match = id.match(tagPattern);
-  return match !== null;
+  return id.includes('News');
 };
 
 export const fetchLatestNews = async (): Promise<NewsItem | null> => {
   const feed = await parser.parseURL(feedUrl);
-  const latestEntry = feed.items[0];
+  const latestEntry = feed.items[0] as FeedItem;
 
-  if (!haveNewsTag(latestEntry.id) 
-      || latestEntry.id === latestNewsId) null;
+  if (!haveNewsTag(latestEntry.id) || latestEntry.id === latestNewsId) {
+    return null;
+  }
 
   latestNewsId = latestEntry.id;
+  console.log(latestNewsId);
 
   return {
     title: latestEntry.title,

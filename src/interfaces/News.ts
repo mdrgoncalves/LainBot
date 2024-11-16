@@ -16,9 +16,20 @@ Return example:
     */
 
 export interface NewsItem {
-  title: string | undefined;
-  link: string | undefined;
-  image: string | undefined;
-  summary: string | undefined;
-  id: string | undefined;
+  title: string;
+  link: string;
+  image: string;
+  summary: string;
+  id: string;
 }
+
+export type FeedItem = {
+  title: string;
+  link: string;
+  pubDate: string;
+  author: string;
+  content: string;
+  contentSnippet: string;
+  id: string;
+  isoDate: string;
+};
