@@ -14,12 +14,14 @@ export const fetchLatestNews = async (): Promise<NewsItem | null> => {
   const feed = await parser.parseURL(feedUrl);
   const latestEntry = feed.items[0] as FeedItem;
 
+  console.log('Latest news:', latestEntry.title);
+
   if (!haveNewsTag(latestEntry.id) || latestEntry.id === latestNewsId) {
+    console.error('No news or latest news is the same as the previous one. Skipping...',);
     return null;
   }
 
   latestNewsId = latestEntry.id;
-  console.log(latestNewsId);
 
   return {
     title: latestEntry.title,

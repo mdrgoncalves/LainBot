@@ -1,6 +1,5 @@
 import { ActivityType } from 'discord.js';
 import { Commands } from '../Commands';
-
 import type { Client } from 'discord.js';
 
 export default (client: Client): void => {
