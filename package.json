@@ -3,7 +3,6 @@
   "version": "0.2.0",
   "main": "./src/index.ts",
   "contributors": [
-    "Lucas Müller <lucas@muller.codes>",
     "Michael Gonçalves <mdr.goncalves@hotmail.com>"
   ],
   "engines": {
