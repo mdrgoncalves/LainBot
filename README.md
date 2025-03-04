@@ -17,7 +17,7 @@ Lain Bot é um bot para Discord que fornece algumas funcionalidades para um grup
 1. Clone o repositório:
     ```sh
     git clone <URL_DO_REPOSITORIO>
-    cd big-bot
+    cd lain-bot
     ```
 
 2. Instale as dependências:
