@@ -1,5 +1,6 @@
 import { ActivityType } from 'discord.js';
 import { Commands } from '../Commands';
+
 import type { Client } from 'discord.js';
 
 export default (client: Client): void => {
@@ -10,7 +11,7 @@ export default (client: Client): void => {
 
     await client.application.commands.set(Commands);
 
-    client.user.setActivity('Todos estamos connectados', {
+    client.user.setActivity('Todos estamos conectados', {
       type: ActivityType.Custom,
     });
 
