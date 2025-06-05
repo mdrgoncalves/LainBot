@@ -1,34 +1,54 @@
+import { readCache, writeCache } from 'utils/cache';
 import Parser from 'rss-parser';
-import type { FeedItem, NewsItem } from 'interfaces/News';
 
-const parser = new Parser();
-const feedUrl = 'https://www.rpgsite.net/feed';
-let latestNewsId = '';
+import { embedConstructor } from 'utils/embedConstructor';
+import { postInChat } from 'utils/postInChat';
+import { isValidEntry } from 'utils/guards';
 
-const haveNewsTag = (id: string): boolean => {
-  return id.includes('News');
-};
+import type { Client, TextChannel } from 'discord.js';
+import type { FeedItem } from 'interfaces/News';
 
-export const fetchLatestNews = async (): Promise<NewsItem | null> => {
-  const feed = await parser.parseURL(feedUrl);
-  const latestEntry = feed.items[0] as FeedItem;
+const FEED_URL = 'https://www.rpgsite.net/feed';
+const DELAY_BETWEEN_REQUESTS = 3 * 60 * 1000; // 3 minutes
 
-  console.log('Latest news:', latestEntry.title);
+export const fetchRpgNews = async (
+  channel: TextChannel,
+  client: Client,
+): Promise<void> => {
+  try {
+    const processedNews = await readCache();
 
-  if (!haveNewsTag(latestEntry.id) || latestEntry.id === latestNewsId) {
-    console.error(
-      'No news or latest news is the same as the previous one. Skipping...',
+    const parser = new Parser();
+    const feed = await parser.parseURL(FEED_URL);
+
+    const newEntries = feed.items.filter(
+      (entry): entry is FeedItem =>
+        isValidEntry(entry) && !processedNews.includes(entry.id),
     );
-    return null;
+
+    for (const entry of newEntries) {
+      const embed = embedConstructor({
+        id: entry.id,
+        title: entry.title,
+        link: entry.link,
+        image: entry.content,
+        summary: entry.contentSnippet,
+      });
+
+      await channel.send({ embeds: [embed] });
+      processedNews.push(entry.id);
+      writeCache(processedNews);
+
+      if (entry.id !== newEntries[newEntries.length - 1].id) {
+        await new Promise(resolve =>
+          setTimeout(resolve, DELAY_BETWEEN_REQUESTS),
+        );
+      }
+    }
+  } catch (error) {
+    postInChat({
+      client,
+      message: `Ocorreu um erro ao buscar as últimas notícias: ${error}`,
+    });
   }
-
-  latestNewsId = latestEntry.id;
-
-  return {
-    title: latestEntry.title,
-    link: latestEntry.link,
-    image: latestEntry.content,
-    summary: latestEntry.contentSnippet,
-    id: latestEntry.id,
-  };
 };
