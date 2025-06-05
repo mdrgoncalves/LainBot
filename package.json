@@ -11,25 +11,31 @@
   },
   "scripts": {
     "start": "ts-node src/index.ts",
-    "dev": "nodemon --watch 'src/' --exec 'ts-node src/index.ts' -e ts",
+    "dev": "npx tsx src/index.ts",
     "build": "tsc"
   },
   "packageManager": "yarn@3.5.0",
   "dependencies": {
+    "axios": "^1.9.0",
     "discord.js": "^14.11.0",
     "dotenv": "^16.1.2",
+    "lowdb": "^7.0.1",
     "rss-parser": "^3.13.0"
   },
   "devDependencies": {
+    "@types/lowdb": "^2.0.3",
     "eslint": "^8.40.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
+    "node-cron": "^4.1.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
     "ts-node": "^10.9.1",
+    "tsx": "^4.19.4",
     "typescript": "latest"
-  }
+  },
+  "type": "module"
 }
