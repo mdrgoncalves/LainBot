@@ -18,3 +18,5 @@
 !yarn.lock
 !.github
 !.github/**
+!cache
+!cache/**
