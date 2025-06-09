@@ -23,7 +23,6 @@
     "rss-parser": "^3.13.0"
   },
   "devDependencies": {
-    "@types/lowdb": "^2.0.3",
     "eslint": "^8.40.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.8.0",

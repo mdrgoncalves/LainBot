@@ -502,15 +502,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lowdb@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "@types/lowdb@npm:2.0.3"
-  dependencies:
-    lowdb: "*"
-  checksum: 5f846186ffc47f171dc36970c4dd0a09bfb214677dd0ad4fe1ab47bea107fefe5c02736a11cdbbc5f7b03baf6d7e376c10d4b45720c640ace0a47bd68d1d49b6
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:*":
   version: 22.8.4
   resolution: "@types/node@npm:22.8.4"
@@ -778,7 +769,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "big-bot@workspace:."
   dependencies:
-    "@types/lowdb": ^2.0.3
     axios: ^1.9.0
     discord.js: ^14.11.0
     dotenv: ^16.1.2
@@ -2558,7 +2548,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lowdb@npm:*, lowdb@npm:^7.0.1":
+"lowdb@npm:^7.0.1":
   version: 7.0.1
   resolution: "lowdb@npm:7.0.1"
   dependencies:
