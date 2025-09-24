@@ -8,8 +8,11 @@ export default (client: Client): void => {
   client.on('ready', async () => {
     const channel = newsChannel(client);
 
-    cron.schedule('*/30 * * * *', async () => {
-      console.log('Running cron job to fetch latest news');
+    // Primeira execução imediata ao iniciar
+    await fetchRpgNews(channel, client);
+
+    // Agendamento normal
+    cron.schedule('0 * * * *', async () => {
       await fetchRpgNews(channel, client);
     });
   });
