@@ -1,4 +1,4 @@
-import type { FeedItem } from 'interfaces/News.js';
+import type { FeedItem } from '../interfaces/News.js';
 
 export const isNews = (id?: string): boolean => !!id && id.includes('News');
 

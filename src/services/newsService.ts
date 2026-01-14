@@ -5,8 +5,9 @@ import { embedConstructor } from '../utils/embedConstructor.js';
 import { postInChat } from '../utils/postInChat.js';
 import { isValidEntry } from '../utils/guards.js';
 import { readCache, writeCache } from '../utils/cache.js';
+import { PROCESSED_ARTICLES_FILE_NAME } from '../constants/cacheFilesNames.js';
 
-import type { FeedItem } from 'interfaces/News.js';
+import type { FeedItem } from '../interfaces/News.js';
 
 const FEED_URL = 'https://www.rpgsite.net/feed';
 const DELAY_BETWEEN_REQUESTS = 3 * 60 * 1000; // 3 minutes
@@ -19,7 +20,7 @@ export const fetchRpgNews = async (
   client: Client,
 ): Promise<void> => {
   try {
-    const processedNewsCache = await readCache();
+    const processedNewsCache = await readCache(PROCESSED_ARTICLES_FILE_NAME);
     const processedNews = new Set(processedNewsCache);
     const feed = await parser.parseURL(FEED_URL);
 
@@ -54,7 +55,7 @@ export const fetchRpgNews = async (
       processedNewsArrFinal.shift();
     }
 
-    await writeCache(processedNewsArrFinal);
+    await writeCache<string>(processedNewsArrFinal, PROCESSED_ARTICLES_FILE_NAME);
   } catch (error) {
     postInChat({
       client,

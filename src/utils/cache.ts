@@ -28,7 +28,10 @@ export const readCache = async (fileName: string): Promise<string[]> => {
   return JSON.parse(data);
 };
 
-export const writeCache = async <T>(cache: T[], fileName: string): Promise<void> => {
+export const writeCache = async <T>(
+  cache: T[],
+  fileName: string,
+): Promise<void> => {
   const filePath = getCacheFilePath(fileName);
   await fs.writeFile(filePath, JSON.stringify(cache, null, 2));
 };
