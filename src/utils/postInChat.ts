@@ -1,5 +1,5 @@
 import { Client } from 'discord.js';
-import { newsChannel } from './discord';
+import { newsChannel } from './discord.js';
 
 type PostInChatParams = {
   client: Client;

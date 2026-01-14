@@ -1,6 +1,6 @@
 import { ApplicationCommandType } from 'discord.js';
 
-import type { Command } from '../interfaces/Command';
+import type { Command } from '../interfaces/Command.js';
 
 export const Hello = {
   name: 'hello',

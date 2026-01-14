@@ -1,6 +1,6 @@
-import ready from './ready';
-import interactionCreate from './interactionCreate';
-import embedMessage from './embedMessage';
+import ready from './ready.js';
+import interactionCreate from './interactionCreate.js';
+import embedMessage from './embedMessage.js';
 
 import type { Client } from 'discord.js';
 

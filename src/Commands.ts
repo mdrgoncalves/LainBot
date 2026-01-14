@@ -1,4 +1,4 @@
-import { Hello } from './commands/Hello';
-import Clear from './commands/Clear';
+import { Hello } from './commands/Hello.js';
+import Clear from './commands/Clear.js';
 
 export const Commands = [Hello, Clear];

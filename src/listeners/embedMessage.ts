@@ -1,8 +1,8 @@
 import { Client } from 'discord.js';
 import cron from 'node-cron';
 
-import { fetchRpgNews } from '../services/newsService';
-import { newsChannel } from './../utils/discord';
+import { fetchRpgNews } from '../services/newsService.js';
+import { newsChannel } from './../utils/discord.js';
 
 export default (client: Client): void => {
   client.on('ready', async () => {

@@ -1,7 +1,7 @@
 import { Client, GatewayIntentBits } from 'discord.js';
 import dotenv from 'dotenv';
 
-import { startListeners } from './listeners';
+import { startListeners } from './listeners/index.js';
 
 console.log('Bot is starting...');
 dotenv.config();

@@ -1,5 +1,5 @@
 import { ActivityType } from 'discord.js';
-import { Commands } from '../Commands';
+import { Commands } from '../Commands.js';
 
 import type { Client } from 'discord.js';
 

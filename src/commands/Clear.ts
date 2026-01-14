@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType, ChannelType } from 'discord.js';
-import type { Command } from '../interfaces/Command';
+import type { Command } from '../interfaces/Command.js';
 
 const Clear: Command = {
   name: 'clear',

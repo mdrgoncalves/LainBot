@@ -1,12 +1,12 @@
 import type { Client, TextChannel } from 'discord.js';
 import Parser from 'rss-parser';
 
-import { embedConstructor } from 'utils/embedConstructor';
-import { postInChat } from 'utils/postInChat';
-import { isValidEntry } from 'utils/guards';
-import { readCache, writeCache } from 'utils/cache';
+import { embedConstructor } from '../utils/embedConstructor.js';
+import { postInChat } from '../utils/postInChat.js';
+import { isValidEntry } from '../utils/guards.js';
+import { readCache, writeCache } from '../utils/cache.js';
 
-import type { FeedItem } from 'interfaces/News';
+import type { FeedItem } from 'interfaces/News.js';
 
 const FEED_URL = 'https://www.rpgsite.net/feed';
 const DELAY_BETWEEN_REQUESTS = 3 * 60 * 1000; // 3 minutes
@@ -49,7 +49,7 @@ export const fetchRpgNews = async (
 
     // Limita o tamanho do cache para os IDs mais recentes
     const processedNewsArrFinal = Array.from(processedNews);
-    
+
     while (processedNewsArrFinal.length > MAX_CACHE_SIZE) {
       processedNewsArrFinal.shift();
     }

@@ -1,5 +1,5 @@
 import { EmbedBuilder } from 'discord.js';
-import { NewsItem } from 'interfaces/News';
+import { NewsItem } from 'interfaces/News.js';
 
 const extractSrc = (html: string): string | null => {
   const match = html.match(/<img\s+[^>]*src="([^"]*)"/);
