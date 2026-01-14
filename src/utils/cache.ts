@@ -2,32 +2,33 @@ import path from 'path';
 import fs from 'fs/promises';
 import { fileURLToPath } from 'url';
 
-// Corrige __dirname para ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const CACHE_FILE = path.resolve(
-  __dirname,
-  '../../cache/processed_articles.json',
-);
+const getCacheFilePath = (fileName: string): string => {
+  return path.resolve(__dirname, `../../cache/${fileName}`);
+};
 
-const ensureCacheFile = async (): Promise<void> => {
-  const cacheDir = path.dirname(CACHE_FILE);
+const ensureCacheFile = async (fileName: string): Promise<void> => {
+  const filePath = getCacheFilePath(fileName);
+  const cacheDir = path.dirname(filePath);
 
   try {
     await fs.mkdir(cacheDir, { recursive: true });
-    await fs.access(CACHE_FILE);
+    await fs.access(filePath);
   } catch {
-    await fs.writeFile(CACHE_FILE, JSON.stringify([]));
+    await fs.writeFile(filePath, JSON.stringify([]));
   }
 };
 
-export const readCache = async (): Promise<string[]> => {
-  await ensureCacheFile();
-  const data = await fs.readFile(CACHE_FILE, 'utf-8');
+export const readCache = async (fileName: string): Promise<string[]> => {
+  const filePath = getCacheFilePath(fileName);
+  await ensureCacheFile(fileName);
+  const data = await fs.readFile(filePath, 'utf-8');
   return JSON.parse(data);
 };
 
-export const writeCache = async (cache: string[]): Promise<void> => {
-  await fs.writeFile(CACHE_FILE, JSON.stringify(cache, null, 2));
+export const writeCache = async <T>(cache: T[], fileName: string): Promise<void> => {
+  const filePath = getCacheFilePath(fileName);
+  await fs.writeFile(filePath, JSON.stringify(cache, null, 2));
 };
