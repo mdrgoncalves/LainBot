@@ -1,7 +1,7 @@
 {
   "name": "big-bot",
-  "version": "0.2.0",
-  "main": "./src/index.ts",
+  "version": "1.0",
+  "main": "dist/index.js",
   "contributors": [
     "Michael Gonçalves <mdr.goncalves@hotmail.com>"
   ],
@@ -10,7 +10,8 @@
     "yarn": "^3.5.0"
   },
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "prestart": "yarn build",
+    "start": "node ./dist/index.js",
     "dev": "npx tsx src/index.ts",
     "build": "tsc"
   },
