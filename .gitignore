@@ -12,14 +12,9 @@
 !README.md
 !src
 !src/**
-!.yarn
-!.yarn/releases
-!.yarn/releases/yarn-3.5.0.cjs
 !yarn.lock
 !.github
 !.github/**
-!cache
-!cache/**
 !.dockerignore
 !Dockerfile
 !docker-compose.yml
