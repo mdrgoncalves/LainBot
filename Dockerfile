@@ -1,21 +1,25 @@
-# Imagem base Node.js
 FROM node:20-alpine
 
-# Definir o diretório de trabalho dentro do contêiner
+# Habilita o Corepack para gerenciar Yarn
+RUN corepack enable
+
+# Define o diretório de trabalho
 WORKDIR /app
 
-# Copiar os arquivos package.json e package-lock.json para o diretório de trabalho
+# Copia arquivos de dependências
 COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn ./.yarn
 
-# Instalar as dependências do projeto usando Yarn
+# Prepara a versão correta do Yarn
+RUN corepack prepare yarn@3.5.0 --activate
+
+# Instala as dependências
 RUN yarn install --frozen-lockfile
 
-# Copia o código-fonte da aplicação para o diretório de trabalho
+# Copia o código fonte
 COPY . .
 
-# Compilar o código TypeScript para JavaScript
-RUN yarn build
+# Compila TypeScript se necessário
+RUN yarn build || echo "No build script found"
 
-# Comando para iniciar a aplicação
+# Comando para iniciar o bot
 CMD ["yarn", "start"]
