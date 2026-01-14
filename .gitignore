@@ -20,3 +20,7 @@
 !.github/**
 !cache
 !cache/**
+!.dockerignore
+!Dockerfile
+!docker-compose.yml
+!.env.example
