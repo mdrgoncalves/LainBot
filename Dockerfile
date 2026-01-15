@@ -19,7 +19,7 @@ RUN yarn install --frozen-lockfile
 COPY . .
 
 # Compila TypeScript se necessário
-RUN yarn build || echo "No build script found"
+RUN yarn build
 
 # Comando para iniciar o bot
 CMD ["yarn", "start"]
