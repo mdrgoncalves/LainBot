@@ -12,8 +12,25 @@ import type { FeedItem } from '../interfaces/News.js';
 const FEED_URL = 'https://www.rpgsite.net/feed';
 const DELAY_BETWEEN_REQUESTS = 3 * 60 * 1000; // 3 minutes
 const MAX_CACHE_SIZE = 50;
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 5000; // 5 segundos
 
 const parser = new Parser();
+
+async function fetchWithRetry(url: string, retries: number): Promise<any> {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      return await parser.parseURL(url);
+    } catch (error) {
+      if (attempt < retries) {
+        console.error(`Erro ao buscar URL (tentativa ${attempt}):`, error);
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+      } else {
+        throw error;
+      }
+    }
+  }
+}
 
 export const fetchRpgNews = async (
   channel: TextChannel,
@@ -22,10 +39,11 @@ export const fetchRpgNews = async (
   try {
     const processedNewsCache = await readCache(PROCESSED_ARTICLES_FILE_NAME);
     const processedNews = new Set(processedNewsCache);
-    const feed = await parser.parseURL(FEED_URL);
+
+    const feed = await fetchWithRetry(FEED_URL, MAX_RETRIES);
 
     const newEntries = feed.items.filter(
-      (entry): entry is FeedItem =>
+      (entry: FeedItem): entry is FeedItem =>
         isValidEntry(entry) && !processedNews.has(entry.id),
     );
 
