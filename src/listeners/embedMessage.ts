@@ -18,8 +18,14 @@ export default (client: Client): void => {
     });
 
     // Verificar aniversários diariamente às 0h
-    cron.schedule('0 0 * * *', async () => {
-      await checkTodaysBirthdays(client);
-    });
+    cron.schedule(
+      '0 0 * * *',
+      async () => {
+        await checkTodaysBirthdays(client);
+      },
+      {
+        timezone: 'America/Sao_Paulo',
+      },
+    );
   });
 };
