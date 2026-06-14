@@ -6,7 +6,14 @@ type PostInChatParams = {
   message: string;
 };
 
-export const postInChat = ({ client, message }: PostInChatParams): void => {
-  const channel = newsChannel(client);
-  channel.send(message);
+export const postInChat = async ({
+  client,
+  message,
+}: PostInChatParams): Promise<void> => {
+  try {
+    const channel = newsChannel(client);
+    await channel.send(message);
+  } catch (error) {
+    console.error('Erro ao postar mensagem no canal de notícias:', error);
+  }
 };

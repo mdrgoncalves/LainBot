@@ -18,11 +18,7 @@ export const setCommands = async (client: Client) => {
   try {
     const guild = await client.guilds.fetch(guildId);
     await guild.commands.set(Commands);
-    console.log(`Registered commands in guild ${guildId}`);
   } catch (error) {
-    console.warn(
-      `Guild ${guildId} not found. Falling back to global commands.`,
-    );
     console.error('Erro ao definir comandos.');
     await client.application.commands.set(Commands);
   }
