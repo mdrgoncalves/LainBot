@@ -1,7 +1,7 @@
 import { ApplicationCommandOptionType, ChannelType } from 'discord.js';
 import type { Command } from '../interfaces/Command.js';
 
-const Clear: Command = {
+export const Clear: Command = {
   name: 'clear',
   description: 'Apaga um número especificado de mensagens do canal.',
   options: [
@@ -52,5 +52,3 @@ const Clear: Command = {
     }
   },
 };
-
-export default Clear;
