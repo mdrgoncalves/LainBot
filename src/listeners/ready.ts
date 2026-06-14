@@ -1,5 +1,5 @@
 import { ActivityType } from 'discord.js';
-import { Commands } from '../Commands.js';
+import { setCommands } from '../utils/setCommands.js';
 
 import type { Client } from 'discord.js';
 
@@ -9,12 +9,12 @@ export default (client: Client): void => {
       return;
     }
 
-    await client.application.commands.set(Commands);
-
     client.user.setActivity('Todos estamos conectados', {
       type: ActivityType.Custom,
     });
 
     console.log(`${client.user.username} is alive!`);
+
+    await setCommands(client);
   });
 };
